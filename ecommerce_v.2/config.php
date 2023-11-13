@@ -9,10 +9,10 @@ session_start();
 defined("DS") ? null : define("DS",DIRECTORY_SEPARATOR );
 
 //defined("FRONT") ? null : define ("FRONT", __DIR__.DS."templates\front");
-defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.1/app/templates/front");
+defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.2/app/templates/front");
 
 //defined("BACK") ? null : define ("BACK", __DIR__.DS."templates\back");
-defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.1/app/templates/back");
+defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.2/app/templates/back");
 
 
 

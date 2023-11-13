@@ -27,10 +27,10 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!--Resto de parte del menú -->
           <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Discolandia</a>
+          <a class="nav-link active" aria-current="page" href="landingpage.php">Discolandia</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Catálogo</a>
+          <a class="nav-link active" aria-current="page" href="catalog.php">Catálogo</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="merchandising.php">Merchandising</a>
