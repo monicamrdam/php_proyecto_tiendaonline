@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Sesion administrador</a>
+                <a class="navbar-brand" href="admin.php">Sesion Administrador</a>
             </div>
           
 <!-- Top Menu Items -->
@@ -34,7 +34,7 @@
            
             <li class="divider"></li>
             <li>
-                <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Salir</a>
             </li>
         </ul>
     </li>

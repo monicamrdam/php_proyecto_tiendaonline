@@ -14,11 +14,12 @@ session_start();
 defined("DS") ? null : define("DS",DIRECTORY_SEPARATOR );
 
 //defined("FRONT") ? null : define ("FRONT", __DIR__.DS."templates\front");
-defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.10/app/templates/front");
+defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.11/app/templates/front");
 
 
 //defined("BACK") ? null : define ("BACK", __DIR__.DS."templates\back");
-defined("BACK") ? null : define ("BACK", "C:/xampp/htdocs/ecommerce/ecommerce_v.10/app/templates/back");
+defined("BACK") ? null : define ("BACK", "C:/xampp/htdocs/ecommerce/ecommerce_v.11/app/templates/back");
+defined("ADMIN") ? null : define ("ADMIN", "C:/xampp/htdocs/ecommerce/ecommerce_v.11/app");
 
 
 

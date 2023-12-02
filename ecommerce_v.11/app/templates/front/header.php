@@ -36,7 +36,7 @@
           <a class="nav-link active" aria-current="page" href="shop.php">Tienda</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="checkout.php">Carrito</a>
+          <a class="nav-link active" aria-current="page" href="checkout.php">Checkout</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="contact.php">Contacto</a>
@@ -46,16 +46,17 @@
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="¿Qué estas buscando?" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Buscar</button>
-      </form>
+      
       <ul class="nav navbar-nav pull-right">
         <li class="nav-item" pull-right>
         <!--login/login/ -->
         <a href="login.php" class="btn">Login</span></a>
+        </li>
+        <li class="nav-item" pull-right>
+        <!--login/login/ -->
         <a href="admin.php" class="btn">Admin</span></a>
         </li>
+
       </ul>
 
     </div>

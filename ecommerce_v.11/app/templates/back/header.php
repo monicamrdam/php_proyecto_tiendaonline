@@ -40,13 +40,11 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
 
-    <!--Top_items
-    php include(TEMPLATE_BACK . "/top_nav.php"); -->
+    <!--Top_items-->
     <?php include(BACK.DS."/top_nav.php"); ?>
 
 
-     <!--Top_items
-     php include(TEMPLATE_BACK . "/side_nav.php");  -->
+ 
       <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <?php include(BACK.DS."/side_nav.php"); ?>
     </nav>
