@@ -7,7 +7,7 @@ require_once("../config.php");
 <div class="col-md-12">
     <div class="row">
         <h1 class="page-header">
-            Todas las ordenes
+            Todas las ordenes:
 
         </h1>
         <h4 class="bg-success">

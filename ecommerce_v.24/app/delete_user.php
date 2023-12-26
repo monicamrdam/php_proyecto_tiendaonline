@@ -9,7 +9,7 @@ if (isset($_GET['delete_user_id'])) {
     confirm($query);
 
 
-    set_message("Usuario borrado");
+    set_message("Usuario borrado.");
     redirect("admin.php?users");
 
 

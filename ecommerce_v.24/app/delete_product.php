@@ -9,7 +9,7 @@ if (isset($_GET['delete_product_id'])) {
     confirm($query);
 
 
-    set_message("Producto borrado");
+    set_message("Producto borrado.");
     redirect("admin.php?products");
 
 

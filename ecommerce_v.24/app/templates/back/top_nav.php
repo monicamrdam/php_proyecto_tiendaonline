@@ -20,7 +20,7 @@
 
                 } else {
 
-                    echo "unregistered user";
+                    echo "Usuario sin registrar.";
                 }
 
 

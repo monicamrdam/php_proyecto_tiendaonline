@@ -48,7 +48,7 @@ include(FRONT . DS . "header.php");
                     </div>
 
 
-                    <!-- Segunda Columna -->
+                    <!-- Second column -->
 
                     <div class="card col-4 p-3 bg-light border-light" style="width: 30rem;">
                         <img src="../resources/img/RollingStones_camiseta.jpg" class="img-fluid card-img-top" alt="">

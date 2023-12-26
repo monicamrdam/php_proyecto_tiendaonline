@@ -10,7 +10,7 @@ if (isset($_GET['delete_category_id'])) {
     confirm($query);
 
 
-    set_message("Categoria borrada");
+    set_message("Categoria borrada.");
     redirect("./admin.php?categories");
 
 

@@ -22,7 +22,7 @@ include(FRONT . DS . "header.php");
     <div class="row">
         <div class="col-lg-12">
             <form action="" name="sentMessage" id="contactForm" method="post">
-            <!-- Si estuviéramos en un servidor online
+            <!-- If we were on an online server
                 <?php send_message(); ?>-->
                 <div class="row">
                     <div class="col-md-6">
