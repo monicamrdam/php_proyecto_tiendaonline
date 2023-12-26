@@ -1,4 +1,3 @@
-
 <?php
 /*With PHP we can store the output, as it is generated, in a buffer. So no data will be sent to the client until expressly indicated. */
 //ob_start();
@@ -12,29 +11,28 @@ session_start();
 
 
 
-defined("DS") ? null : define("DS",DIRECTORY_SEPARATOR );
+defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
 
 //defined("FRONT") ? null : define ("FRONT", __DIR__.DS."templates\front");
-defined("FRONT") ? null : define ("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/templates/front");
+defined("FRONT") ? null : define("FRONT", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/templates/front");
 
 
 //defined("BACK") ? null : define ("BACK", __DIR__.DS."templates\back");
-defined("BACK") ? null : define ("BACK", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/templates/back");
-defined("ADMIN") ? null : define ("ADMIN", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app");
-defined("UPLOAD_DIRECTORY") ? null : define ("UPLOAD_DIRECTORY", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/uploads");
+defined("BACK") ? null : define("BACK", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/templates/back");
+defined("ADMIN") ? null : define("ADMIN", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app");
+defined("UPLOAD_DIRECTORY") ? null : define("UPLOAD_DIRECTORY", "C:/xampp/htdocs/ecommerce/ecommerce_v.24/app/uploads");
 
 
 
-defined("DB_HOST") ? null : define ("DB_HOST", "localhost");
-defined("DB_USER") ? null : define ("DB_USER", "root");
-defined("DB_PASSWORD") ? null : define ("DB_PASSWORD", "");
-defined("DB_NAME") ? null : define ("DB_NAME", "discolandia_db");
+defined("DB_HOST") ? null : define("DB_HOST", "localhost");
+defined("DB_USER") ? null : define("DB_USER", "root");
+defined("DB_PASSWORD") ? null : define("DB_PASSWORD", "");
+defined("DB_NAME") ? null : define("DB_NAME", "discolandia_db");
 
 
-$connection= mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD, DB_NAME); 
+$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 require_once("functions.php");
 require_once("cart.php");
 
 ?>
-

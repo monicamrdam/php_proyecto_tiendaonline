@@ -13,12 +13,12 @@ if (isset($_GET['add'])) {
     while ($row = fetch_array($query)) {
         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]) {
             $_SESSION['product_' . $_GET['add']] += 1;
-            redirect("../ecommerce_v.22/app/catalog.php");
+            redirect("../ecommerce_v.24/app/catalog.php");
         } else {
             set_message("Solo tenemos  " . $row['product_quantity'] . " " . $row['product_title'] . " disponibles.");
-            redirect("../ecommerce_v.23/app/catalog.php");
+            redirect("../ecommerce_v.24/app/catalog.php");
         }
-    }                          
+    }
 
 
 }
@@ -32,10 +32,10 @@ if (isset($_GET['add_icon'])) {
     while ($row = fetch_array($query)) {
         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add_icon']]) {
             $_SESSION['product_' . $_GET['add_icon']] += 1;
-            redirect("../ecommerce_v.23/app/checkout.php");
+            redirect("../ecommerce_v.24/app/checkout.php");
         } else {
             set_message("Solo tenemos  " . $row['product_quantity'] . " " . $row['product_title'] . " disponible");
-            redirect("../ecommerce_v.23/app/checkout.php");
+            redirect("../ecommerce_v.24/app/checkout.php");
         }
     }
 
@@ -50,14 +50,14 @@ if (isset($_GET['remove'])) {
     $_SESSION['product_' . $_GET['remove']]--;
 
     if ($_SESSION['product_' . $_GET['remove']] < 1) {
-            //unset — Destruye una o más variables especificadas
+        //unset — Destroys one or more specified variables
 
         unset($_SESSION['item_total']);
         unset($_SESSION['item_quantity']);
-        redirect("../ecommerce_v.23/app/checkout.php");
+        redirect("../ecommerce_v.24/app/checkout.php");
 
     } else {
-        redirect("../ecommerce_v.23/app/checkout.php");
+        redirect("../ecommerce_v.24/app/checkout.php");
 
     }
 
@@ -68,20 +68,20 @@ if (isset($_GET['delete'])) {
     //unset — Destruye una o más variables especificadas
     unset($_SESSION['item_total']);
     unset($_SESSION['item_quantity']);
-    redirect("../ecommerce_v.23/app/checkout.php");
+    redirect("../ecommerce_v.24/app/checkout.php");
 
 }
 
 
 function cart()
 {
-    //variables utilizadas
+    //variables used
     $total = 0;
     $item_quantity = 0;
-    $item_name =1;
-    $item_number =1;
-    $amount =1;
-    $quantity =1;
+    $item_name = 1;
+    $item_number = 1;
+    $amount = 1;
+    $quantity = 1;
 
     foreach ($_SESSION as $name => $value) {
 
@@ -131,23 +131,23 @@ function cart()
 
         DELIMETER;
                     echo $product;
-                    $item_name ++;
-                    $item_number ++;
-                    $amount ++;
-                    $quantity ++;
+                    $item_name++;
+                    $item_number++;
+                    $amount++;
+                    $quantity++;
 
                 }
                 $_SESSION['item_total'] = $total += $sub;
                 $_SESSION['item_quantity'] = $item_quantity;
-               
+
             }
-            
-          
+
+
         }
-        
+
     }
-    if(isset($_SESSION['item_quantity'])&&$_SESSION['item_quantity']>=1) {
-        show_button($item_name,$total);
+    if (isset($_SESSION['item_quantity']) && $_SESSION['item_quantity'] >= 1) {
+        show_button($item_name, $total);
     }
 
 }
@@ -181,7 +181,6 @@ function process_transaction()
                     $id = substr($name, 8, $length);
 
                     //order_amount, order_transaction, order_currency, order_status
-                    //cantidad, referencia transacción, moneda, estado
                     $send_order = query("INSERT INTO orders (order_amount, order_transaction, order_currency, order_status ) VALUES('{$amount}', '{$transaction}','{$currency}','{$status}')");
                     $last_id = last_id();
                     confirm($send_order);
@@ -217,7 +216,7 @@ function process_transaction()
     } else {
 
 
-       // redirect("../ecommerce_v.23/app/landingpage.php");
+        // redirect("../ecommerce_v.24/app/landingpage.php");
 
 
     }
@@ -226,7 +225,8 @@ function process_transaction()
 
 }
 
-function show_button($item_name,$total){
+function show_button($item_name, $total)
+{
 
 
 
@@ -238,7 +238,7 @@ function show_button($item_name,$total){
     <br>
     </tr>
 DELIMETER;
-        echo $button;
+    echo $button;
 
 
 
