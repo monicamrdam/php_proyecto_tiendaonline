@@ -1,6 +1,6 @@
 <?php
 
-//Funciones auxiliares
+//Auxiliary functions
 
 /*mysqli::$insert_id -- mysqli_insert_id — 
 Returns the value generated for an AUTO_INCREMENT column by the last query */
@@ -20,7 +20,7 @@ function set_message($msg)
     }
 }
 
-//unset — Destruye una o más variables especificadas
+//unset — Destroys one or more specified variables
 function display_message()
 {
     if (isset($_SESSION['message'])) {
@@ -29,25 +29,24 @@ function display_message()
     }
 }
 
-//header — Enviar encabezado sin formato HTTP
+//header — Send raw HTTP header
 function redirect($location)
 {
     return header("Location: $location ");
 }
 
-//mysqli::query -- mysqli_query — Realiza una consulta a la base de datos
+//mysqli::query -- mysqli_query — Perform a database query
 function query($sql)
 {
     global $connection;
     return mysqli_query($connection, $sql);
 }
 
-//mysqli::query -- mysqli_query — Realiza una consulta a la base de datos
 function confirm($result)
 {
     global $connection;
     if (!$result) {
-        die("QUERY FALLO " . mysqli_error($connection));
+        die("Fallo en la query " . mysqli_error($connection));
     }
 }
 
@@ -60,8 +59,9 @@ function escape_string($string)
     return mysqli_real_escape_string($connection, $string);
 }
 
-/*mysqli_result::fetch_array -- mysqli_fetch_array — 
-Obtiene una fila de resultados como un array asociativo, numérico, o ambos */
+/*mysqli_result::fetch_array -- mysqli_fetch_array —
+Gets a row of results as an associative array, numeric, or both */
+
 function fetch_array($result)
 {
     return mysqli_fetch_array($result);
@@ -71,7 +71,7 @@ function fetch_array($result)
 
 
 
-/****************************Admin menú Ordenes************************/
+/****************************Admin menu Orders************************/
 
 function display_orders()
 {
@@ -99,7 +99,7 @@ DELIMETER;
 
 
 
-/************************ Admin Ver productos ********************/
+/************************ Admin See products********************/
 
 
 function get_products_in_admin()
@@ -138,10 +138,10 @@ DELIMETER;
 
 
 
-/************************ Admin Editar productos ********************/
+/************************ Admin Edit products ********************/
 
 
-//Para direccionar las imágenes a la carpeta uploads al actualizarlas
+//To direct images to the uploads folder when updating them
 $upload_directory = "uploads";
 
 function display_image($picture)
@@ -221,7 +221,7 @@ function update_product()
 
 
 
-/***************************Admin añadir productos********************/
+/***************************Admin Add products********************/
 
 
 function add_product()
@@ -244,7 +244,7 @@ function add_product()
         $query = query("INSERT INTO products(product_title, product_category_id, product_price, product_description, short_desc, product_quantity, product_image) VALUES('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_description}', '{$short_desc}', '{$product_quantity}', '{$product_image}')");
         $last_id = last_id();
         confirm($query);
-        set_message("New Product with id {$last_id} was Added");
+        set_message("Nuevo producto con id {$last_id} ha sido añadido");
         redirect("admin.php?products");
 
     }
@@ -273,7 +273,7 @@ function show_categories_add_product_page()
 
 
 
-/*************************Admin añadir categorias ********************/
+/*************************Admin Add categories ********************/
 
 function show_categories_in_admin()
 {
@@ -312,14 +312,14 @@ function add_category()
 
             $insert_cat = query("INSERT INTO categories(cat_id, cat_title) VALUES('{$cat_id}','{$cat_title}') ");
             confirm($insert_cat);
-            set_message("Categoria creada");
+            set_message("Categoria creada.");
         }
     }
 }
 
 
 
-/************************Admin usuarios ***********************/
+/************************Admin Users ***********************/
 
 function display_users()
 {
@@ -366,7 +366,7 @@ function add_user()
         $query = query("INSERT INTO users(username,email,password) VALUES('{$username}','{$email}','{$password}')");
         confirm($query);
 
-        set_message("Usuario creado");
+        set_message("Usuario creado.");
 
         redirect("admin.php?users");
 
@@ -384,11 +384,11 @@ function add_user()
 
 
 
-/****************************Front Catálogo ************************/
+/****************************Front Catalog ************************/
 
-/*Permite que solo se muestren los carácteres que yo quiero siendo todas las carts iguales
-        Y además que no se corte en mitad de una palabra
-        Esto es sino importa donde se acabe $string= substr($row['product_description'],0,150);
+/*Allows only the characters that I want to be displayed, with all cards being the same
+        And also don't cut off in the middle of a word
+        This is if it doesn't matter where it ends $string= substr($row['product_description'],0,150);
         */
 function cortar_string($string, $largo)
 {
@@ -412,7 +412,7 @@ function get_products()
     while ($row = fetch_array($query)) {
 
 
-        $textocortado = cortar_string($row['product_description'], 150);
+        $sort_text = cortar_string($row['product_description'], 150);
         $product_image = display_image($row['product_image']);
 
         $product = <<<DELIMETER
@@ -429,7 +429,7 @@ function get_products()
                   <h6 class="card-title pull-right">{$row['product_price']} €</h6>
                 </div>
                    <p class="card-text texto">
-                   $textocortado...</p>
+                   $sort_text...</p>
                    </p>
                 <a class="btn btn-primary" href="../cart.php?add={$row['product_id']}">Añadir a carrito</a>
                           </div>
@@ -443,7 +443,7 @@ DELIMETER;
 
 
 
-/****************************Front login como Admin ************************/
+/****************************Front login as Admin ************************/
 
 
 function login_user()
@@ -470,7 +470,7 @@ function login_user()
 
 
 
-/****************************Front contacto************************/
+/****************************Front contact************************/
 
 
 
@@ -493,12 +493,12 @@ function send_message()
 
         if (!$result) {
 
-            set_message("Sorry we could not send your message");
+            set_message("Lo sentimos, no pudimos enviar tu mensaje.");
             redirect("contact.php");
 
         } else {
 
-            set_message("Your Message has been sent");
+            set_message("Tu mensaje ha sido enviado.");
             redirect("contact.php");
         }
 
@@ -518,254 +518,7 @@ function send_message()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************************No se utilizan ***********************/
-
-function get_categories()
-{
-
-
-    $query = query("SELECT * FROM categories");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-
-        $categories_links = <<<DELIMETER
-
-<a href='category.php?id={$row['cat_id']}' class='list-group-item'>{$row['cat_title']}</a>
-
-
-DELIMETER;
-
-        echo $categories_links;
-    }
-
-}
-
-
-
-
-
-
-function get_products_in_cat_page()
-{
-    $query = query(" SELECT * FROM products WHERE product_category_id = " . escape_string($_GET['id']) . " AND product_quantity >= 1 ");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $product_image = display_image($row['product_image']);
-
-        $product = <<<DELIMETER
-
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="../resources/{$product_image}" alt="">
-                    <div class="caption">
-                        <h3>{$row['product_title']}</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-DELIMETER;
-
-        echo $product;
-    }
-
-}
-
-
-
-function get_products_in_shop_page()
-{
-
-
-    $query = query(" SELECT * FROM products WHERE product_quantity >= 1 ");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $product_image = display_image($row['product_image']);
-
-        $product = <<<DELIMETER
-
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="../resources/{$product_image}" alt="">
-                    <div class="caption">
-                        <h3>{$row['product_title']}</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-DELIMETER;
-
-        echo $product;
-
-
-    }
-
-
-}
-
-
-
-function count_all_records($table)
-{
-    return mysqli_num_rows(query('SELECT * FROM' . $table));
-}
-
-function count_all_products_in_stock()
-{
-
-    return mysqli_num_rows(query('SELECT * FROM products WHERE product_quantity >= 1'));
-}
-
-
-
-
-function get_products_with_pagination($perPage = "6")
-{
-    $rows = count_all_products_in_stock();
-
-    if (!empty($rows)) {
-
-
-        if (isset($_GET['page'])) { //get page from URL if its there
-            $page = preg_replace('#[^0-9]#', '', $_GET['page']); //filter everything but numbers
-
-
-        } else {
-            $page = 1;
-        }
-
-
-        $lastPage = ceil($rows / $perPage);
-
-        if ($page < 1) {
-            $page = 1;
-        } elseif ($page > $lastPage) {
-            $page = $lastPage;
-        }
-
-        $middleNumbers = '';
-        $sub1 = $page - 1;
-        $sub2 = $page - 2;
-        $add1 = $page + 1;
-        $add2 = $page + 2;
-        if ($page == 1) {
-            $middleNumbers .= '<li class="page-item active"><a>' . $page . '</a></li>';
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $add1 . '">' . $add1 . '</a></li>';
-        } elseif ($page == $lastPage) {
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $sub1 . '">' . $sub1 . '</a></li>';
-            $middleNumbers .= '<li class="page-item active"><a>' . $page . '</a></li>';
-        } elseif ($page > 2 && $page < ($lastPage - 1)) {
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $sub2 . '">' . $sub2 . '</a></li>';
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $sub1 . '">' . $sub1 . '</a></li>';
-            $middleNumbers .= '<li class="page-item active"><a>' . $page . '</a></li>';
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $add1 . '">' . $add1 . '</a></li>';
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $add2 . '">' . $add2 . '</a></li>';
-        } elseif ($page > 1 && $page < $lastPage) {
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page= ' . $sub1 . '">' . $sub1 . '</a></li>';
-            $middleNumbers .= '<li class="page-item active"><a>' . $page . '</a></li>';
-            $middleNumbers .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $add1 . '">' . $add1 . '</a></li>';
-        }
-
-        $limit = 'LIMIT ' . ($page - 1) * $perPage . ',' . $perPage;
-        $query2 = query(" SELECT * FROM products WHERE product_quantity >= 1 " . $limit);
-        confirm($query2);
-        $outputPagination = ""; // Initialize the pagination output variable
-
-        if ($page != 1) {
-            $prev = $page - 1;
-            $outputPagination .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $prev . '">Back</a></li>';
-        }
-
-        $outputPagination .= $middleNumbers;
-
-        if ($page != $lastPage) {
-            $next = $page + 1;
-            $outputPagination .= '<li class="page-item"><a class="page-link" href="' . $_SERVER['PHP_SELF'] . '?page=' . $next . '">Next</a></li>';
-        }
-
-        while ($row = fetch_array($query2)) {
-            $product_image = display_image($row['product_image']);
-            $product = <<<DELIMETER
-
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <a href="item.php?id={$row['product_id']}"><img class="img-responsive" style="max-height: 250px; min-height: 250px"  src="../resources/{$product_image}" alt=""></a>
-        <div class="caption">
-            <h4 class="pull-right">&#36;{$row['product_price']}</h4>
-            <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
-            </h4>
-            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-             <p class="text-center"><a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['product_id']}">Add to cart</a>
-             </a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a></p>
-        </div>
-    </div>
-</div>
-
-DELIMETER;
-            echo $product;
-        }
-
-        echo "<div class='text-center' style='clear: both;' ><ul class='pagination' >{$outputPagination}</ul></div>";
-
-    } else {
-
-
-
-        echo "<h1 class='text-center'>No Products</h1>";
-        echo "<br>";
-        echo "<p class='text-center'>Create some products <a href='http://localhost:8888/ecom-paypal/public/admin/admin.php?add_product'>HERE</a></p>";
-
-    }
-
-}
-
-
-
-
-
-
-
-
-
-/************************No se si se utilizaran ***********************/
-
-
-
+/************************I don't know if I will use it***********************/
 
 
 
@@ -805,172 +558,3 @@ DELIMETER;
 }
 
 
-//////// SLIDES ////////
-
-function add_slides()
-{
-
-    if (isset($_POST['add_slide'])) {
-
-
-        $slide_title = escape_string($_POST['slide_title']);
-        $slide_image = escape_string($_FILES['file']['name']);
-        $slide_image_loc = escape_string($_FILES['file']['tmp_name']);
-
-
-        if (empty($slide_title) || empty($slide_image)) {
-
-            echo "<p class='bg-danger'>This field cannot be empty</p>";
-
-
-        } else {
-
-
-
-            move_uploaded_file($slide_image_loc, UPLOAD_DIRECTORY . DS . $slide_image);
-
-            $query = query("INSERT INTO slides(slide_title, slide_image) VALUES('{$slide_title}', '{$slide_image}')");
-            confirm($query);
-            set_message("Slide Added");
-            redirect("admin.php?slides");
-
-
-
-
-
-        }
-
-
-    }
-
-}
-function get_current_slide()
-{
-
-
-}
-
-function get_current_slide_in_admin()
-{
-
-    $query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $slide_image = display_image($row['slide_image']);
-
-        $slide_active_admin = <<<DELIMETER
-
-
-
-    <img class="img-responsive" src="../../resources/{$slide_image}" alt="$slide_image">
-
-
-
-DELIMETER;
-
-        echo $slide_active_admin;
-
-
-    }
-
-
-
-}
-
-
-function get_active_slide()
-{
-
-    $query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
-
-
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $slide_image = display_image($row['slide_image']);
-
-        $slide_active = <<<DELIMETER
-
-
- <div class="item active">
-    <img style="height: 450px"  class="slide-image" src="../resources/{$slide_image}" alt="$slide_image">
-</div>
-
-
-DELIMETER;
-
-        echo $slide_active;
-
-
-    }
-}
-
-function get_slides()
-{
-
-    $query = query("SELECT * FROM slides");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $slide_image = display_image($row['slide_image']);
-
-        $slides = <<<DELIMETER
- <div class="item">
-    <img style="height: 450px"  class="slide-image" src="../resources/{$slide_image}" alt="$slide_image">
-</div>
-DELIMETER;
-
-        echo $slides;
-
-
-    }
-
-
-}
-function get_slide_thumbnails()
-{
-
-    $query = query("SELECT * FROM slides ORDER BY slide_id ASC ");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-
-        $slide_image = display_image($row['slide_image']);
-
-        $slide_thumb_admin = <<<DELIMETER
-
-
-<div class="col-xs-6 col-md-3 image_container">
-    
-    <a href="admin.php?delete_slide_id={$row['slide_id']}">
-        
-         <img  class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="$slide_image">
-
-    </a>
-
-    <div class="caption">
-       <p>{$row['slide_title']}</p>
-    </div>
-
-
-</div>
-
-
-    
-
-
-
-DELIMETER;
-
-        echo $slide_thumb_admin;
-
-
-    }
-
-
-
-}
