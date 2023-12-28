@@ -413,6 +413,7 @@ function get_products()
 
 
         $sort_text = cortar_string($row['product_description'], 150);
+        $sort_text_tittle = cortar_string($row['product_title'], 30);
         $product_image = display_image($row['product_image']);
 
         $product = <<<DELIMETER
@@ -424,14 +425,53 @@ function get_products()
         <a href="item.php?id={$row['product_id']}"><img style="width: 18rem";" src="{$product_image}" alt=""></a>
         </div>
         <div class="card-body">
-                  <div class="d-flex justify-content-between ">
-                  <h6 class="card-title"><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a></h6>
+                  <div class="d-flex justify-content-between">
+                  <h6 class="card-title "><a href="item.php?id={$row['product_id']}">$sort_text_tittle </a></h6>
                   <h6 class="card-title pull-right">{$row['product_price']} €</h6>
                 </div>
                    <p class="card-text texto">
                    $sort_text...</p>
                    </p>
                 <a class="btn btn-primary" href="../cart.php?add={$row['product_id']}">Añadir a carrito</a>
+                          </div>
+        </div>
+    </div>
+   
+DELIMETER;
+        echo $product;
+    }
+}
+
+
+/****************************Front Merchandising ************************/
+
+function get_merchandising()
+{
+
+    $query = query("SELECT * FROM merchandising");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+
+        $sort_text = cortar_string($row['merchand_description'], 150);
+        $product_image = display_image($row['merchand_imagen']);
+
+        $product = <<<DELIMETER
+
+        <div class="col py-5 mx-5">
+        <div class="card" style="width: 20rem;">
+        <div class="card-body">
+        <h5 class="text-center bg-dark text-white">{$row['merchand_short_desc']}</a></h5>
+        <a href="item.php?id={$row['merchand_id']}"><img style="width: 18rem";" src="{$product_image}" alt=""></a>
+        </div>
+        <div class="card-body">
+                  <div class="d-flex justify-content-between ">
+                  <h6 class="card-title"><a href="item.php?id={$row['merchand_id']}">{$row['merchand_title']}</a></h6>
+                  <h6 class="card-title pull-right">{$row['merchand_price']} €</h6>
+                </div>
+                   <p class="card-text texto">
+                   $sort_text...</p>
+                   </p>
+                <a class="btn btn-primary" href="../cart.php?add={$row['merchand_id']}">Añadir a carrito</a>
                           </div>
         </div>
     </div>
