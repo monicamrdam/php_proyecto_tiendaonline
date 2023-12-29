@@ -11,10 +11,10 @@ include(FRONT . DS . "header.php");
 
 
         <?php
-        $query = query(" SELECT * FROM products WHERE product_id = " . escape_string($_GET['id']) . " ");
+        $query = query(" SELECT * FROM merchandising  WHERE merchand_id = " . escape_string($_GET['id']) . " ");
         confirm($query);
         while ($row = fetch_array($query)):
-            $category = show_product_category_title($row['product_category_id']);
+            $category = show_product_category_title($row['merchand_category_id']);
             ?>
 
 
@@ -25,7 +25,7 @@ include(FRONT . DS . "header.php");
                 </div>
 
                     <div class="col-md-5 ">
-                        <img class="img-responsive"  style="width: 21rem;" src="<?php echo display_image($row['product_image']); ?>" alt="">
+                        <img class="img-responsive"  style="width: 21rem;" src="<?php echo display_image($row['merchand_image']); ?>" alt="">
                     </div>
 
 
@@ -33,16 +33,16 @@ include(FRONT . DS . "header.php");
                     <div class="card text-center" style="width: 18rem; ">
                         <div class="card-body ">
                             <h4 class="bg-black text-white">Título:
-                                <?php echo $row['product_title']; ?>
+                                <?php echo $row['merchand_title']; ?>
                             </h4>
                             <br>
                             <h6 class="text-info">
-                                <?php echo $row['product_price']; ?> €
+                                <?php echo $row['merchand_price']; ?> €
                             </h6>
                             <br>
                             <br>
                             <h6>Interprete:
-                                <?php echo $row['short_desc']; ?>
+                                <?php echo $row['merchand_short_desc']; ?>
                             </h6>
                             <h6>Categoría:
                                 <?php echo $category ?>
@@ -51,7 +51,7 @@ include(FRONT . DS . "header.php");
                             <br>
                             <form action="">
                                 <div class="form-group">
-                                    <a href="../cart.php?add=<?php echo $row['product_id']; ?>"
+                                    <a href="../cart.php?add_merchandising=<?php echo $row['merchand_id']; ?>"
                                         class="btn btn-primary">Añadir a carrito</a>
                                 </div>
                             </form>
@@ -69,7 +69,7 @@ include(FRONT . DS . "header.php");
                             <h4 class="bg-black text-white">Descripcion: </h4>
                             <br>
                             <h6>
-                                <?php echo $row['product_description']; ?>
+                                <?php echo $row['merchand_description']; ?>
                             </h6>
                             <br>
 

@@ -422,17 +422,17 @@ function get_products()
         <div class="card" style="width: 20rem;">
         <div class="card-body">
         <h5 class="text-center bg-dark text-white">{$row['short_desc']}</a></h5>
-        <a href="item.php?id={$row['product_id']}"><img style="width: 18rem";" src="{$product_image}" alt=""></a>
+        <a href="item_catalog.php?id={$row['product_id']}"><img style="width: 18rem";" src="{$product_image}" alt=""></a>
         </div>
         <div class="card-body">
                   <div class="d-flex justify-content-between">
-                  <h6 class="card-title "><a href="item.php?id={$row['product_id']}">$sort_text_tittle </a></h6>
+                  <h6 class="card-title "><a href="item_catalog.php?id={$row['product_id']}">$sort_text_tittle </a></h6>
                   <h6 class="card-title pull-right">{$row['product_price']} €</h6>
                 </div>
                    <p class="card-text texto">
                    $sort_text...</p>
                    </p>
-                <a class="btn btn-primary" href="../cart.php?add={$row['product_id']}">Añadir a carrito</a>
+                <a class="btn btn-primary" href="../cart.php?add_catalog={$row['product_id']}">Añadir a carrito</a>
                           </div>
         </div>
     </div>
@@ -453,31 +453,31 @@ function get_merchandising()
     while ($row = fetch_array($query)) {
 
         $sort_text = cortar_string($row['merchand_description'], 150);
-        $product_image = display_image($row['merchand_imagen']);
+        $merchand_image = display_image($row['merchand_image']);
 
-        $product = <<<DELIMETER
+        $merchand = <<<DELIMETER
 
         <div class="col py-5 mx-5">
         <div class="card" style="width: 20rem;">
         <div class="card-body">
         <h5 class="text-center bg-dark text-white">{$row['merchand_short_desc']}</a></h5>
-        <a href="item.php?id={$row['merchand_id']}"><img style="width: 18rem";" src="{$product_image}" alt=""></a>
+        <a  href="item_merchandising.php?id={$row['merchand_id']}"><img class="text-center" style="width: 18rem";" src="{$merchand_image}" alt=""></a>
         </div>
         <div class="card-body">
                   <div class="d-flex justify-content-between ">
-                  <h6 class="card-title"><a href="item.php?id={$row['merchand_id']}">{$row['merchand_title']}</a></h6>
+                  <h6 class="card-title"><a href="item_merchandising.php?id={$row['merchand_id']}">{$row['merchand_title']}</a></h6>
                   <h6 class="card-title pull-right">{$row['merchand_price']} €</h6>
                 </div>
                    <p class="card-text texto">
                    $sort_text...</p>
                    </p>
-                <a class="btn btn-primary" href="../cart.php?add={$row['merchand_id']}">Añadir a carrito</a>
+                <a class="btn btn-primary" href="../cart.php?add_merchandising={$row['merchand_id']}">Añadir a carrito</a>
                           </div>
         </div>
     </div>
    
 DELIMETER;
-        echo $product;
+        echo $merchand;
     }
 }
 

@@ -46,10 +46,10 @@ include(FRONT . DS . "header.php");
         <table class="table table-bordered" cellspacing="0">
 
           <tr class="cart-subtotal">
-            <th>Discos:</th>
+            <th>Productos:</th>
             <td><span class="amount">
                 <?php
-                echo isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : $_SESSION['item_quantity'] = "0";
+                 echo isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : $_SESSION['item_quantity'] = "0" ;
                 ?>
               </span></td>
           </tr>
