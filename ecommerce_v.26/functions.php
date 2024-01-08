@@ -81,12 +81,11 @@ function display_orders()
         $orders = <<<DELIMETER
 
             <tr>
-                <td>{$row['order_id']}</td>
+                <td>{$row['order_transaction_id']}</td>
+                <td>{$row['order_quantity']}</td>
                 <td>{$row['order_amount']}</td>
-                <td>{$row['order_transaction']}</td>
-                <td>{$row['order_currency']}</td>
                 <td>{$row['order_status']}</td>
-                <td><a class="btn btn-primary" href="admin.php?delete_order_id={$row['order_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a class="btn btn-primary" href="admin.php?delete_order_id={$row['order_transaction_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
 
 DELIMETER;

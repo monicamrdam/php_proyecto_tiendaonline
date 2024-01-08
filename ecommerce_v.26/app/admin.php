@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
 
         <?php
         //if($_SERVER['REQUEST_URI'] == "/ecommerce/ecommerce_v.12/app/admin/" || $_SERVER['REQUEST_URI'] == "/ecommerce/ecommerce_v.11/app/admin.php")  {
-        if ($_SERVER['REQUEST_URI'] == "/ecommerce/ecommerce_v.24/app/admin.php") {
+        if ($_SERVER['REQUEST_URI'] == "/ecommerce/ecommerce_v.26/app/admin.php") {
             include(ADMIN . "/admin_content.php");
 
         }

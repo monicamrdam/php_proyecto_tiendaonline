@@ -14,10 +14,10 @@ if (isset($_GET['add_catalog'])) {
     while ($row = fetch_array($query)) {
         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add_catalog']]) {
             $_SESSION['product_' . $_GET['add_catalog']] += 1;
-            redirect("../ecommerce_v.25/app/catalog.php");
+            redirect("../ecommerce_v.26/app/catalog.php");
         } else {
             set_message("Solo tenemos  " . $row['product_quantity'] . " " . $row['product_title'] . " disponibles.");
-            redirect("../ecommerce_v.25/app/catalog.php");
+            redirect("../ecommerce_v.26/app/catalog.php");
         }
     }
 
@@ -33,10 +33,10 @@ if (isset($_GET['add_icon_catalog'])) {
     while ($row = fetch_array($query)) {
         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add_icon_catalog']]) {
             $_SESSION['product_' . $_GET['add_icon_catalog']] += 1;
-            redirect("../ecommerce_v.25/app/checkout.php");
+            redirect("../ecommerce_v.26/app/checkout.php");
         } else {
             set_message("Solo tenemos  " . $row['product_quantity'] . " " . $row['product_title'] . " disponibles.");
-            redirect("../ecommerce_v.25/app/checkout.php");
+            redirect("../ecommerce_v.26/app/checkout.php");
         }
     }
 
@@ -54,10 +54,10 @@ if (isset($_GET['remove_catalog'])) {
 
         unset($_SESSION['item_total']);
         unset($_SESSION['item_quantity']);
-        redirect("../ecommerce_v.25/app/checkout.php");
+        redirect("../ecommerce_v.26/app/checkout.php");
 
     } else {
-        redirect("../ecommerce_v.25/app/checkout.php");
+        redirect("../ecommerce_v.26/app/checkout.php");
 
     }
 
@@ -71,7 +71,7 @@ if (isset($_GET['delete_catalog'])) {
     $_SESSION['product_' . $_GET['delete_catalog']] = '0';
     unset($_SESSION['item_total']);
     unset($_SESSION['item_quantity']);
-    redirect("../ecommerce_v.25/app/checkout.php");
+    redirect("../ecommerce_v.26/app/checkout.php");
 
 }
 
@@ -89,11 +89,11 @@ if (isset($_GET['add_merchandising'])) {
         echo $row['merchand_price'];
         if ($row['merchand_quantitiy'] != $_SESSION['merchand_' . $_GET['add_merchandising']]) {
             $_SESSION['merchand_' . $_GET['add_merchandising']] += 1;
-            redirect("../ecommerce_v.25/app/merchandising.php");
+            redirect("../ecommerce_v.26/app/merchandising.php");
         } else {
             echo $row['merchand_quantitiy'];
             set_message("Solo tenemos  " . $row['merchand_quantitiy'] . " " . $row['merchand_title'] . " disponibles.");
-            redirect("../ecommerce_v.25/app/merchandising.php");
+            redirect("../ecommerce_v.26/app/merchandising.php");
         }
     }
 
@@ -112,10 +112,10 @@ if (isset($_GET['add_icon_merchandising'])) {
     while ($row = fetch_array($query)) {
         if ($row['merchand_quantitiy'] != $_SESSION['merchand_' . $_GET['add_icon_merchandising']]) {
             $_SESSION['merchand_' . $_GET['add_icon_merchandising']] += 1;
-            redirect("../ecommerce_v.25/app/checkout.php");
+            redirect("../ecommerce_v.26/app/checkout.php");
         } else {
             set_message("Solo tenemos  " . $row['merchand_quantitiy'] . " " . $row['merchand_title'] . " disponibles.");
-            redirect("../ecommerce_v.25/app/checkout.php");
+            redirect("../ecommerce_v.26/app/checkout.php");
         }
     }
 
@@ -131,10 +131,10 @@ if (isset($_GET['remove_merchandising'])) {
 
         unset($_SESSION['item_total']);
         unset($_SESSION['item_quantity']);
-        redirect("../ecommerce_v.25/app/checkout.php");
+        redirect("../ecommerce_v.26/app/checkout.php");
 
     } else {
-        redirect("../ecommerce_v.25/app/checkout.php");
+        redirect("../ecommerce_v.26/app/checkout.php");
 
     }
 
@@ -146,7 +146,7 @@ if (isset($_GET['delete_merchandising'])) {
     //unset — Destruye una o más variables especificadas
     unset($_SESSION['item_total']);
     unset($_SESSION['item_quantity']);
-    redirect("../ecommerce_v.25/app/checkout.php");
+    redirect("../ecommerce_v.26/app/checkout.php");
 
 }
 
@@ -355,15 +355,35 @@ function print_cart()
         $municipality = escape_string($_POST['municipality']);
         $fulladdress = escape_string($_POST['fulladdress']);
         $postalcode = escape_string($_POST['postalcode']);
+        //uniqid() Gets a uniquely prefixed identifier based on the current time in microseconds.
+       $order_transaction_id=  uniqid();
+
+        $order_status="pending send";
         $item_quantity= $_SESSION['item_quantity'];
         $item_total= $_SESSION['item_total'];
 
-        redirect("print.php?name=$username&surnames=$surnames&email=$email&phone=$phone&country=$country&province=$province&municipality=$municipality&fulladdress=$fulladdress&postalcode=$postalcode&item_quantity=$item_quantity&item_total=$item_total");
+        
+        $insert_buyer = query("INSERT INTO buyer (order_transaction_id , buyer_name , buyer_surnames, buyer_email , buyer_phone, buyer_country , buyer_province,  	buyer_municipality,  buyer_fulladdress,  buyer_postalcode ) VALUES('{$order_transaction_id}','{$username}','{$surnames}','{$email}','{$phone}','{$country}','{$province}' ,'{$municipality}' ,'{$fulladdress}' ,'{$postalcode}')");
+        confirm($insert_buyer);
+
+        $insert_orders = query("INSERT INTO orders (order_transaction_id , order_quantity , order_amount , order_status ) VALUES('{$order_transaction_id}','{$item_quantity}','{$item_total}','{$order_status}')");
+        confirm($insert_orders);
+
+        redirect("print.php?order_transaction_id=$order_transaction_id");
 
   }
 }
 
 /************************I don't know if I will use it***********************/
+
+
+
+
+
+
+
+
+
 
 
 function process_transaction()
@@ -428,7 +448,7 @@ function process_transaction()
     } else {
 
 
-        // redirect("../ecommerce_v.25/app/landingpage.php");
+        // redirect("../ecommerce_v.26/app/landingpage.php");
 
 
     }
