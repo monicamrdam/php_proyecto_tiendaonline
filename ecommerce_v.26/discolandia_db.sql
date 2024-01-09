@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2024 a las 05:33:09
+-- Tiempo de generación: 08-01-2024 a las 16:40:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,10 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `buyer` (
-  `buyer_id` int(11) NOT NULL,
-  `order_transaction_id` int(11) NOT NULL,
+  `order_transaction_id` varchar(255) NOT NULL,
   `buyer_name` varchar(255) NOT NULL,
-  `buyer_surnames` multipoint NOT NULL,
+  `buyer_surnames` varchar(255) NOT NULL,
   `buyer_email` varchar(255) NOT NULL,
   `buyer_phone` varchar(255) NOT NULL,
   `buyer_country` varchar(255) NOT NULL,
@@ -40,6 +39,14 @@ CREATE TABLE `buyer` (
   `buyer_fulladdress` varchar(255) NOT NULL,
   `buyer_postalcode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `buyer`
+--
+
+INSERT INTO `buyer` (`order_transaction_id`, `buyer_name`, `buyer_surnames`, `buyer_email`, `buyer_phone`, `buyer_country`, `buyer_province`, `buyer_municipality`, `buyer_fulladdress`, `buyer_postalcode`) VALUES
+('659b579318982', 'Antonio', 'Del Moral', 'antonio@gmail.com', '678678678', 'España', 'Madrid', 'Madrid', 'Gailieo galilei 15', '3406'),
+('659b59f2100cc', 'Evaristo', 'Del Real', 'evaristo@gmail.com', '678654321', 'España', 'Salamanca', 'Salamanca', 'Galileo Galilei', '4564');
 
 -- --------------------------------------------------------
 
@@ -60,7 +67,8 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (1, 'Pop nacional'),
 (2, 'Pop internacional'),
 (3, 'Rock nacional'),
-(4, 'Rock internacional');
+(4, 'Rock internacional'),
+(5, 'Jazz');
 
 -- --------------------------------------------------------
 
@@ -91,7 +99,8 @@ INSERT INTO `merchandising` (`merchand_id`, `merchand_title`, `merchand_category
 (1004, 'Stevie Nicks ', 4, 20, 6, 'Stephanie Lynn \"Stevie\" Nicks es una cantante y compositora estadounidense, conocida tanto por su trabajo con Fleetwood Mac como por su extensa carrera solista. Es una de las pocas artistas de rock que ha mantenido una larga carrera en solitario formando parte al mismo tiempo de una banda exitosa.', 'Camiseta de Stevie Nicks', 'StevieNicks_camiseta.jpg '),
 (1005, 'Taylor Swift ', 2, 10, 5, 'Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense. Criada en Wyomissing, se mudó a Nashville a los 14 años para realizar una carrera de música country.', 'Camiseta de Taylor Swift', 'taylorSwift_camiseta.jpg'),
 (1006, 'LP', 4, 15, 6, 'Laura Pergolizzi, conocida artísticamente como LP, es una cantautora y compositora estadounidense. Entre sus trabajos, destaca el exitoso sencillo «Lost on You».​ Ha lanzado, hasta la fecha, seis álbumes y tres EP.', 'Camiseta de LP', 'lp_camiseta.jpg'),
-(1007, 'Depeche mode', 4, 30, 6, 'Depeche Mode, es una de las bandas más influyentes, queridas y de mayor venta de todos los tiempos. Ha vendido más de 100 millones de discos y ha tocado en directo para más de 30 millones de fans en todo el mundo.', 'Camisa de Depeche Mode', 'depecheMode_camiseta.jpg');
+(1007, 'Depeche mode', 4, 30, 6, 'Depeche Mode, es una de las bandas más influyentes, queridas y de mayor venta de todos los tiempos. Ha vendido más de 100 millones de discos y ha tocado en directo para más de 30 millones de fans en todo el mundo.', 'Camisa de Depeche Mode', 'depecheMode_camiseta.jpg'),
+(1008, 'Miles Davis', 5, 10, 5, 'Uno de los músicos de jazz con mayor influencia y capacidad creativa fue Miles Davis (1926-1991). Durante su prolongada carrera fue capaz de implicarse a fondo y hacer aportaciones por igual a estilos tan diversos como el bebop, el jazz modal, el hardbop, el cool y la fusión con el rock o la música electrónica.', 'Camiseta Miles Daves\r\n', 'milesDaves_camiseta.jpg');
 
 -- --------------------------------------------------------
 
@@ -100,10 +109,9 @@ INSERT INTO `merchandising` (`merchand_id`, `merchand_title`, `merchand_category
 --
 
 CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `order_transaction` varchar(255) NOT NULL,
+  `order_transaction_id` varchar(255) NOT NULL,
+  `order_quantity` int(11) NOT NULL,
   `order_amount` float NOT NULL,
-  `order_currency` varchar(255) NOT NULL,
   `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -111,8 +119,9 @@ CREATE TABLE `orders` (
 -- Volcado de datos para la tabla `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `order_transaction`, `order_amount`, `order_currency`, `order_status`) VALUES
-(1, '1234', 450, '€', 'Completada');
+INSERT INTO `orders` (`order_transaction_id`, `order_quantity`, `order_amount`, `order_status`) VALUES
+('659b579318982', 6, 91.97, 'pending send'),
+('659b59f2100cc', 4, 97.98, 'pending send');
 
 -- --------------------------------------------------------
 
@@ -143,7 +152,8 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_category_id`, `p
 (5, 'Live In Concert The 24 Karat Gold Tour ', 4, 17.99, 9, 'Disco en directo de Stevie Nicks, la cantante de Fleetwood Mac. Contiene 17 canciones, entre ellas los hits \'Stand Back\', \'Rhiannon\', \'Landslide\', \'Gypsy\' y \'Edge of Seventeen\' . Este disco es la banda sonora de la película concierto del mismo título que  se estrenó en España el 21 de octubre.', 'Stevie Nicks ', 'disco_stevieNicks.jpg\r\n'),
 (6, 'Midnights: Mahogany Edition', 2, 22.99, 11, 'Taylor Swift pública el 21/10 su nuevo álbum, \"Midnights\". Disponibles varias versiones y formatos: Todos con  13 canciones escritas en mitad de la noche: Las historias de 13 noches sin dormir.', 'Taylor Swift ', 'disco_taylorSwift.jpg'),
 (7, 'LP - 2Vinilo Lost On You (Opaque Gold)', 4, 30.99, 8, 'El álbum \"Lost On You\" de LP se lanza en formato 2 LP vinilo en color dorado. El álbum fue publicado originalmente en 2016 y es un viaje conmovedor a través de las complejidades del amor y la nostalgia. Muestra la voz distintiva y emotiva de la artista en un contexto de influencias folk, rock y pop. ', 'LP', 'disco_lp.png'),
-(8, ' Memento Mori ', 4, 17.99, 6, 'Memento Mori es así un álbum de transformación, construido con Andy en vida y que tristemente se ha llenado de un significado muy especial con el fallecimiento de este. Es el décimo quinto álbum del grupo inglés.', 'Depeche Mode', 'dicos_depecheMode.jpg');
+(8, ' Memento Mori ', 4, 17.99, 6, 'Memento Mori es así un álbum de transformación, construido con Andy en vida y que tristemente se ha llenado de un significado muy especial con el fallecimiento de este. Es el décimo quinto álbum del grupo inglés.', 'Depeche Mode', 'dicos_depecheMode.jpg'),
+(9, 'Kind Of Blue ', 5, 18.99, 7, 'En agosto de 1959 se publicó el álbum titulado Kind of Blue, editado por Columbia Records. El trompetista Miles Davis dirigió a un elenco de los mejores músicos de jazz de su tiempo: John Coltrane, Bill Evans, Cannonball Adderley, Paul Chambers y Jimmy Cobb (además de Wynton Kelly, pianista en una de las pistas). ', 'Miles Davis', 'disco_Miles Davis.jpg');
 
 -- --------------------------------------------------------
 
@@ -186,12 +196,6 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES
 --
 
 --
--- Indices de la tabla `buyer`
---
-ALTER TABLE `buyer`
-  ADD PRIMARY KEY (`buyer_id`);
-
---
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -202,12 +206,6 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `merchandising`
   ADD PRIMARY KEY (`merchand_id`);
-
---
--- Indices de la tabla `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indices de la tabla `products`
@@ -232,28 +230,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `buyer`
---
-ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `merchandising`
 --
 ALTER TABLE `merchandising`
-  MODIFY `merchand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1008;
-
---
--- AUTO_INCREMENT de la tabla `orders`
---
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `merchand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `reports`

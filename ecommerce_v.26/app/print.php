@@ -23,7 +23,7 @@ class PDF extends FPDF
         //Movernos a la derecha
         $this->Cell(80);
         //Título
-        $this->Cell(60, 10, 'Recibo compra', 1, 0, 'C');
+        $this->Cell(40, 10, 'Recibo compra', 1, 0, 'C');
         //Salto de línea
         $this->Ln(20);
 
